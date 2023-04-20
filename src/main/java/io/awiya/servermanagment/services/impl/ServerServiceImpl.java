@@ -45,7 +45,7 @@ public class ServerServiceImpl implements ServerService {
     public Server pingServer(String ipAddress) throws IOException {
 
         if (!IpAddressValidator.isValidIpAddress(ipAddress)) {
-            throw new IllegalArgumentException("Invalid IP address: " + ipAddress);
+            throw new IllegalArgumentException("Oops, it looks like you've entered the IP address of a btata. Please enter a valid IP address." + ipAddress);
         }
 
         log.info("Pinging server with IP address: {}", ipAddress);
@@ -54,7 +54,7 @@ public class ServerServiceImpl implements ServerService {
             throw new ServerNotFoundException("The requested server could not be found.");
         }
         InetAddress address = InetAddress.getByName(ipAddress);
-        server.setStatus(address.isReachable(10000) ? SERVER_UP : SERVER_DOWN);
+        server.setStatus(address.isReachable(5000) ? SERVER_UP : SERVER_DOWN);
         serverReposiroty.save(server);
         return server;
     }
@@ -109,7 +109,7 @@ public class ServerServiceImpl implements ServerService {
     private boolean isReachable(String ipAddress, int port, int timeOut) {
 
         if (!IpAddressValidator.isValidIpAddress(ipAddress)) {
-            throw new IllegalArgumentException("Invalid IP address: " + ipAddress);
+            throw new IllegalArgumentException("Oops, it looks like you've entered the IP address of a btata. Please enter a valid IP address." + ipAddress);
         }
 
 
