@@ -8,6 +8,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
+import org.springframework.web.util.UriComponentsBuilder;
 
 import javax.transaction.Transactional;
 import java.io.IOException;
@@ -85,14 +86,29 @@ public class ServerServiceImpl implements ServerService {
                 .toUriString();
     }
 
+    private String anotherSetServerImageUrl() {
+
+        String[] imageNames = { "server1.png", "server2.png", "server3.png", "server4.png" };
+
+        UriComponentsBuilder uriBuilder = ServletUriComponentsBuilder.fromCurrentContextPath();
+
+        String imageName = imageNames[new Random().nextInt(imageNames.length)];
+        String imagePath = "/server/image/" + imageName;
+        uriBuilder.path(imagePath);
+
+        return uriBuilder.toUriString();
+    }
+
+
     private boolean isReachable(String ipAddress, int port, int timeOut) {
-        try {
-            try(Socket socket = new Socket()) {
-                socket.connect(new InetSocketAddress(ipAddress, port), timeOut);
-            }
+
+        try (Socket socket = new Socket()) {
+            InetSocketAddress address = new InetSocketAddress(ipAddress, port);
+            socket.connect(address, timeOut);
             return true;
-        }catch (IOException exception){
+        } catch (IOException e) {
             return false;
         }
     }
+
 }
