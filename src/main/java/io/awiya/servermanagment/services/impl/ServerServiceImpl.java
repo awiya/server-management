@@ -4,6 +4,7 @@ import io.awiya.servermanagment.exceptions.ServerNotFoundException;
 import io.awiya.servermanagment.model.Server;
 import io.awiya.servermanagment.repositories.ServerReposiroty;
 import io.awiya.servermanagment.services.ServerService;
+import io.awiya.servermanagment.utils.IpAddressValidator;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -42,6 +43,11 @@ public class ServerServiceImpl implements ServerService {
 
     @Override
     public Server pingServer(String ipAddress) throws IOException {
+
+        if (!IpAddressValidator.isValidIpAddress(ipAddress)) {
+            throw new IllegalArgumentException("Invalid IP address: " + ipAddress);
+        }
+
         log.info("Pinging server with IP address: {}", ipAddress);
         Server server = serverReposiroty.findByIpAddress(ipAddress);
         if (server == null) {
@@ -101,6 +107,11 @@ public class ServerServiceImpl implements ServerService {
 
 
     private boolean isReachable(String ipAddress, int port, int timeOut) {
+
+        if (!IpAddressValidator.isValidIpAddress(ipAddress)) {
+            throw new IllegalArgumentException("Invalid IP address: " + ipAddress);
+        }
+
 
         try (Socket socket = new Socket()) {
             InetSocketAddress address = new InetSocketAddress(ipAddress, port);
