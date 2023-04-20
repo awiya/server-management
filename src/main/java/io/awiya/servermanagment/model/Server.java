@@ -12,6 +12,7 @@ import javax.persistence.Id;
 import javax.validation.constraints.NotEmpty;
 
 import static javax.persistence.GenerationType.AUTO;
+import static javax.persistence.GenerationType.IDENTITY;
 
 
 @Entity
@@ -20,7 +21,7 @@ import static javax.persistence.GenerationType.AUTO;
 @AllArgsConstructor
 public class Server {
     @Id
-    @GeneratedValue(strategy = AUTO)
+    @GeneratedValue(strategy = IDENTITY)
     private Long id;
     @Column(unique = true)
     @NotEmpty(message = "IP Address cannot be empty or null")
