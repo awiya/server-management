@@ -1,5 +1,6 @@
 package io.awiya.servermanagment.model;
 
+import io.awiya.servermanagment.enums.Status;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -28,5 +29,6 @@ public class Server {
     private String memory;
     private String type;
     private String imageUrl;
+    private Status status;
 
 }
