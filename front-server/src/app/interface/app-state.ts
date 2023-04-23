@@ -1,7 +1,7 @@
-import { DataState } from "../enum/data-state.enum";
+import { DataState } from '../enums/data-state.enum';
 
 export interface AppState<T> {
-    dataState: DataState;
-    appData?: T;
-    error?: string;
+  dataState: DataState;
+  appData?: T;
+  error?: string;
 }
