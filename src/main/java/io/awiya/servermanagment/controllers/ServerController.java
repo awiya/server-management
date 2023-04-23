@@ -3,7 +3,6 @@ package io.awiya.servermanagment.controllers;
 import io.awiya.servermanagment.model.Response;
 import io.awiya.servermanagment.model.Server;
 import io.awiya.servermanagment.services.ServerService;
-
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -12,8 +11,6 @@ import javax.validation.Valid;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.concurrent.TimeUnit;
-
 
 import static io.awiya.servermanagment.enums.Status.SERVER_UP;
 import static java.time.LocalDateTime.now;
